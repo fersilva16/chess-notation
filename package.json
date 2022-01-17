@@ -12,12 +12,13 @@
   "homepage": "https://github.com/fersilva16/chess-notation#readme",
   "license": "MIT",
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
+    "dev": "next dev",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "lint:fix": "yarn lint --fix",
+    "postinstall": "simple-git-hooks",
     "start": "next start",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit"
   },
@@ -42,7 +43,17 @@
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "4.3.0",
+    "nano-staged": "0.5.0",
     "prettier": "2.5.1",
+    "simple-git-hooks": "2.7.0",
     "typescript": "4.5.4"
+  },
+  "nano-staged": {
+    "*": "prettier --ignore-unknown --write",
+    "*.{ts,tsx}": "bash -c yarn type-check",
+    "*.{js,ts,tsx}": "eslint --fix"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "yarn nano-staged"
   }
 }
