@@ -1,6 +1,16 @@
 {
   "name": "chess-notation",
-  "private": true,
+  "description": "A site to learn chess notation",
+  "author": "Fernando Silva <hello@fersilva.dev>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fersilva16/chess-notation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fersilva16/chess-notation/issues"
+  },
+  "homepage": "https://github.com/fersilva16/chess-notation#readme",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
