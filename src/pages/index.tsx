@@ -10,7 +10,11 @@ const Container = styled.div<LayoutProps & FlexboxProps>`
 `;
 
 const BoardContainer = styled.div<LayoutProps>`
-  ${layout}
+  position: relative;
+  width: 40%;
+  padding-bottom: 40%;
+
+  ${layout};
 `;
 
 const Home: NextPage = function Home() {
@@ -22,7 +26,7 @@ const Home: NextPage = function Home() {
       justifyContent="center"
       alignItems="center"
     >
-      <BoardContainer width="500px" height="500px">
+      <BoardContainer>
         <Board />
       </BoardContainer>
     </Container>
