@@ -59,30 +59,27 @@ export const Board = function Board() {
   const onMouseMove: MouseEventHandler<HTMLDivElement> = (event) => {
     const pos = event.currentTarget.getBoundingClientRect();
 
-    setX(event.clientX - pos.x);
-    setY(event.clientY - pos.y);
+    setX((event.clientX - pos.x) / (pos.width / 8));
+    setY((event.clientY - pos.y) / (pos.height / 8));
   };
 
-  const onMouseDown: MouseEventHandler<any> = (event) => {
-    const pos = event.currentTarget.getBoundingClientRect();
-    const row = Math.floor(y / (pos.width / 8));
-    const column = Math.floor(x / (pos.height / 8));
+  const onMouseDown: MouseEventHandler<any> = () => {
+    const row = Math.floor(y);
+    const column = Math.floor(x);
 
     const piece = pieces.find((p) => p.row === row && p.column === column);
 
     if (piece) setHoldingPiece(piece);
   };
 
-  const onMouseUp: MouseEventHandler<any> = (event) => {
+  const onMouseUp: MouseEventHandler<any> = () => {
     if (!holdingPiece) return;
 
     holdingPiece.ref.current!.removeAttribute('style');
 
     const index = pieces.indexOf(holdingPiece);
-
-    const pos = event.currentTarget.getBoundingClientRect();
-    const row = Math.floor(y / (pos.width / 8));
-    const column = Math.floor(x / (pos.height / 8));
+    const row = Math.floor(y);
+    const column = Math.floor(x);
 
     setPieces([
       ...pieces.slice(0, index),
@@ -95,11 +92,7 @@ export const Board = function Board() {
 
   useEffect(() => {
     if (holdingPiece) {
-      const { width, height } = holdingPiece.ref.current!.getBoundingClientRect();
-      const pieceX = x - width / 2;
-      const pieceY = y - height / 2;
-
-      holdingPiece.ref.current!.style.transform = `translate(${pieceX}px, ${pieceY}px)`;
+      holdingPiece.ref.current!.style.transform = `translate(${x * 100 - 50}%, ${y * 100 - 50}%)`;
     }
   }, [x, y, holdingPiece]);
 
