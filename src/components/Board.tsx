@@ -7,7 +7,7 @@ import { Piece, PieceProps } from './Piece';
 const Container = styled.div<LayoutProps & FlexboxProps>`
   background-image: url('https://images.chesscomfiles.com/chess-themes/boards/green/150.png');
   background-size: 100%;
-  position: relative;
+  position: absolute;
 
   ${layout}
   ${flexbox}
