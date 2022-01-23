@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 import { layout, LayoutProps, flexbox, FlexboxProps } from 'styled-system';
 
-import { Board } from '../components/Board';
+import { UIBoard } from '../components/UIBoard';
 
 const Container = styled.div<LayoutProps & FlexboxProps>`
   ${layout}
@@ -27,7 +27,7 @@ const Home: NextPage = function Home() {
       alignItems="center"
     >
       <BoardContainer>
-        <Board />
+        <UIBoard />
       </BoardContainer>
     </Container>
   );
