@@ -1,4 +1,3 @@
-import { PIECES_BASE_URL } from '../images';
 import { IPiece } from './IPiece';
 import { PIECE_COLORS } from './PieceColorEnum';
 import { PIECE_TYPES } from './PieceTypeEnum';
@@ -17,5 +16,9 @@ const pieceColorImageMap: Record<keyof typeof PIECE_COLORS, string> = {
   WHITE: 'w',
 };
 
-export const pieceImageUrl = (piece: IPiece) =>
-  `${PIECES_BASE_URL}/${pieceColorImageMap[piece.color]}${pieceTypeImageMap[piece.type]}.png`;
+export const pieceImageUrl = (piece: IPiece) => {
+  const color = pieceColorImageMap[piece.color];
+  const type = pieceTypeImageMap[piece.type];
+
+  return `https://images.chesscomfiles.com/chess-themes/pieces/neo/150/${color}${type}.png`;
+};
