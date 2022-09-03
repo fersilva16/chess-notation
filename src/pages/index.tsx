@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 
-import UIBoard from '../components/UIBoard';
+import Board from '../components/Board';
 
 const Container = styled.div`
   width: 100vw;
@@ -21,7 +21,7 @@ const Home: NextPage = function Home() {
   return (
     <Container>
       <BoardContainer>
-        <UIBoard />
+        <Board />
       </BoardContainer>
     </Container>
   );

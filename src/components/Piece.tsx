@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { memo } from 'react';
 
-import { Piece } from '../chess/Piece';
+import { IPiece } from '../chess/piece/IPiece';
+import { pieceImageUrl } from '../chess/piece/pieceImageUrl';
 
 type ContainerProps = {
   imageUrl: string;
@@ -19,17 +20,17 @@ const Container = styled.div<ContainerProps>`
   transform: ${({ row, column }) => `translate(${column * 100}%, ${row * 100}%)`};
 `;
 
-export type UIPieceProps = {
-  piece: Piece.T;
+export type PieceProps = {
+  piece: IPiece;
 };
 
-const UIPiece = memo(({ piece }: UIPieceProps) => (
+const Piece = memo(({ piece }: PieceProps) => (
   <Container
     ref={piece.ref}
     row={piece.position.row}
     column={piece.position.column}
-    imageUrl={Piece.getImageUrl(piece)}
+    imageUrl={pieceImageUrl(piece)}
   />
 ));
 
-export default UIPiece;
+export default Piece;
