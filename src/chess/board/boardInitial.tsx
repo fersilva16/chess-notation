@@ -4,8 +4,8 @@ import { PIECE_TYPES } from '../piece/PieceTypeEnum';
 import { positionCreate } from '../position/positionCreate';
 import { boardFromPieces } from './boardFromPieces';
 
-export const boardInitial = () =>
-  boardFromPieces([
+export const boardInitial = () => {
+  return boardFromPieces([
     pieceCreate(PIECE_COLORS.WHITE, PIECE_TYPES.ROOK, positionCreate(7, 0)),
     pieceCreate(PIECE_COLORS.WHITE, PIECE_TYPES.KNIGHT, positionCreate(7, 1)),
     pieceCreate(PIECE_COLORS.WHITE, PIECE_TYPES.BISHOP, positionCreate(7, 2)),
@@ -42,3 +42,4 @@ export const boardInitial = () =>
     pieceCreate(PIECE_COLORS.BLACK, PIECE_TYPES.KNIGHT, positionCreate(0, 6)),
     pieceCreate(PIECE_COLORS.BLACK, PIECE_TYPES.ROOK, positionCreate(0, 7)),
   ]);
+};
