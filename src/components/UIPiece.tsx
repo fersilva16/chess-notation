@@ -23,7 +23,7 @@ export type UIPieceProps = {
   piece: Piece.T;
 };
 
-export const UIPiece = memo(({ piece }: UIPieceProps) => (
+const UIPiece = memo(({ piece }: UIPieceProps) => (
   <Container
     ref={piece.ref}
     row={piece.position.row}
@@ -31,3 +31,5 @@ export const UIPiece = memo(({ piece }: UIPieceProps) => (
     imageUrl={Piece.getImageUrl(piece)}
   />
 ));
+
+export default UIPiece;
