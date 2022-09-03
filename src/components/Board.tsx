@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import type { MouseEventHandler } from 'react';
+import { useEffect, useState } from 'react';
 
 import { gameStateInitial } from '../chess/gameState/gameStateInitial';
 import { gameStateMovePiece } from '../chess/gameState/gameStateMovePiece';
-import { IPiece } from '../chess/piece/IPiece';
+import type { IPiece } from '../chess/piece/IPiece';
 import { pieceKey } from '../chess/piece/pieceKey';
 import { positionClamp } from '../chess/position/positionClamp';
 import { positionCreate } from '../chess/position/positionCreate';
@@ -17,7 +18,7 @@ const Container = styled.div`
   height: 100%;
 `;
 
-function Board() {
+const Board = () => {
   const [gameState, setGameState] = useState(gameStateInitial);
   const [holdingPiece, setHoldingPiece] = useState<IPiece | undefined>(undefined);
   const [x, setX] = useState<number>(0);
@@ -30,23 +31,23 @@ function Board() {
     setY((event.clientY - pos.y) / (pos.height / 8));
   };
 
-  const onMouseDown: MouseEventHandler<any> = () => {
+  const onMouseDown: MouseEventHandler<unknown> = () => {
     const row = Math.floor(y);
     const column = Math.floor(x);
 
     const piece = gameState.board[row][column];
 
-    if (piece) {
-      piece.ref.current!.style.zIndex = '1';
+    if (piece?.ref.current) {
+      piece.ref.current.style.zIndex = '1';
 
       setHoldingPiece(piece);
     }
   };
 
-  const onMouseUp: MouseEventHandler<any> = () => {
+  const onMouseUp: MouseEventHandler<unknown> = () => {
     if (!holdingPiece) return;
 
-    holdingPiece.ref.current!.removeAttribute('style');
+    holdingPiece.ref.current?.removeAttribute('style');
 
     const row = Math.floor(y);
     const column = Math.floor(x);
@@ -57,11 +58,11 @@ function Board() {
   };
 
   useEffect(() => {
-    if (holdingPiece) {
+    if (holdingPiece?.ref.current) {
       const row = positionClamp(x) * 100 - 50;
       const column = positionClamp(y) * 100 - 50;
 
-      holdingPiece.ref.current!.style.transform = `translate(${row}%, ${column}%)`;
+      holdingPiece.ref.current.style.transform = `translate(${row}%, ${column}%)`;
     }
   }, [x, y, holdingPiece]);
 
@@ -72,6 +73,6 @@ function Board() {
       )}
     </Container>
   );
-}
+};
 
 export default Board;

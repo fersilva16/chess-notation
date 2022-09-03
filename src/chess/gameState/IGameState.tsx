@@ -1,5 +1,5 @@
-import { IBoard } from '../board/IBoard';
-import { PIECE_COLORS } from '../piece/PieceColorEnum';
+import type { IBoard } from '../board/IBoard';
+import type { PIECE_COLORS } from '../piece/PieceColorEnum';
 
 export type IGameState = {
   board: IBoard;

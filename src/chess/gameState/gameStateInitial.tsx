@@ -1,6 +1,6 @@
 import { boardInitial } from '../board/boardInitial';
 import { PIECE_COLORS } from '../piece/PieceColorEnum';
-import { IGameState } from './IGameState';
+import type { IGameState } from './IGameState';
 
 export const gameStateInitial = (): IGameState => ({
   board: boardInitial(),

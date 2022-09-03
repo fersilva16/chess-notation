@@ -1,6 +1,6 @@
 import { changeArrayIndex } from '../changeArrayIndex';
-import { IPiece } from '../piece/IPiece';
-import { IBoard } from './IBoard';
+import type { IPiece } from '../piece/IPiece';
+import type { IBoard } from './IBoard';
 
 export const boardAddPiece = (board: IBoard, piece: IPiece) =>
   changeArrayIndex(
