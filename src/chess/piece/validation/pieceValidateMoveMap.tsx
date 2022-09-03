@@ -10,7 +10,10 @@ type PieceValidateMoveFunction = (
   boardSquare?: IBoardSquare,
 ) => boolean;
 
-export const pieceValidateMoveMap: Record<keyof typeof PIECE_TYPES, PieceValidateMoveFunction> = {
+export const pieceValidateMoveMap: Record<
+  keyof typeof PIECE_TYPES,
+  PieceValidateMoveFunction
+> = {
   [PIECE_TYPES.PAWN]: piecePawnValidateMove,
   [PIECE_TYPES.QUEEN]: () => false,
   [PIECE_TYPES.ROOK]: () => false,

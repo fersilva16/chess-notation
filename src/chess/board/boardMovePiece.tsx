@@ -5,5 +5,8 @@ import { boardAddPiece } from './boardAddPiece';
 import { boardRemovePiece } from './boardRemovePiece';
 import type { IBoard } from './IBoard';
 
-export const boardMovePiece = (board: IBoard, piece: IPiece, position: IPosition) =>
-  boardAddPiece(boardRemovePiece(board, piece), pieceMove(piece, position));
+export const boardMovePiece = (
+  board: IBoard,
+  piece: IPiece,
+  position: IPosition,
+) => boardAddPiece(boardRemovePiece(board, piece), pieceMove(piece, position));

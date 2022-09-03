@@ -17,7 +17,8 @@ const Container = styled.div<ContainerProps>`
   background-image: url(${(props) => props.imageUrl});
   background-size: 100%;
 
-  transform: ${({ row, column }) => `translate(${column * 100}%, ${row * 100}%)`};
+  transform: ${({ row, column }) =>
+    `translate(${column * 100}%, ${row * 100}%)`};
 `;
 
 export type PieceProps = {
