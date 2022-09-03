@@ -1,25 +1,20 @@
 import styled from '@emotion/styled';
 import { memo } from 'react';
-import {
-  layout,
-  LayoutProps,
-  background,
-  BackgroundProps,
-  position,
-  PositionProps,
-} from 'styled-system';
 
 import { Piece } from '../chess/Piece';
 
 type ContainerProps = {
+  imageUrl: string;
   row: number;
   column: number;
 };
 
-const Container = styled.div<LayoutProps & BackgroundProps & PositionProps & ContainerProps>`
-  ${layout}
-  ${background}
-  ${position}
+const Container = styled.div<ContainerProps>`
+  position: absolute;
+  width: 12.5%;
+  height: 12.5%;
+  background-image: url(${(props) => props.imageUrl});
+  background-size: 100%;
 
   transform: ${({ row, column }) => `translate(${column * 100}%, ${row * 100}%)`};
 `;
@@ -31,12 +26,8 @@ export type UIPieceProps = {
 export const UIPiece = memo(({ piece }: UIPieceProps) => (
   <Container
     ref={piece.ref}
-    position="absolute"
     row={piece.position.row}
     column={piece.position.column}
-    width="12.5%"
-    height="12.5%"
-    backgroundImage={`url(${Piece.getImageUrl(piece)})`}
-    backgroundSize="100%"
+    imageUrl={Piece.getImageUrl(piece)}
   />
 ));
