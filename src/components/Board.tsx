@@ -20,7 +20,9 @@ const Container = styled.div`
 
 const Board = () => {
   const [gameState, setGameState] = useState(gameStateInitial);
-  const [holdingPiece, setHoldingPiece] = useState<IPiece | undefined>(undefined);
+  const [holdingPiece, setHoldingPiece] = useState<IPiece | undefined>(
+    undefined,
+  );
   const [x, setX] = useState<number>(0);
   const [y, setY] = useState<number>(0);
 
@@ -52,7 +54,9 @@ const Board = () => {
     const row = Math.floor(y);
     const column = Math.floor(x);
 
-    setGameState(gameStateMovePiece(gameState, holdingPiece, positionCreate(row, column)));
+    setGameState(
+      gameStateMovePiece(gameState, holdingPiece, positionCreate(row, column)),
+    );
 
     setHoldingPiece(undefined);
   };
@@ -67,9 +71,15 @@ const Board = () => {
   }, [x, y, holdingPiece]);
 
   return (
-    <Container onMouseMove={onMouseMove} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+    <Container
+      onMouseMove={onMouseMove}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
+    >
       {gameState.board.map((row) =>
-        row.map((square) => square && <Piece key={pieceKey(square)} piece={square} />),
+        row.map(
+          (square) => square && <Piece key={pieceKey(square)} piece={square} />,
+        ),
       )}
     </Container>
   );
