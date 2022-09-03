@@ -1,19 +1,17 @@
 import styled from '@emotion/styled';
 import { MouseEventHandler, useEffect, useState } from 'react';
-import { layout, LayoutProps, flexbox, FlexboxProps } from 'styled-system';
 
 import { GameState } from '../chess/GameState';
 import { Piece } from '../chess/Piece';
 import { Position } from '../chess/Position';
 import { UIPiece } from './UIPiece';
 
-const Container = styled.div<LayoutProps & FlexboxProps>`
+const Container = styled.div`
   background-image: url('https://images.chesscomfiles.com/chess-themes/boards/green/150.png');
   background-size: 100%;
   position: absolute;
-
-  ${layout}
-  ${flexbox}
+  width: 100%;
+  height: 100%;
 `;
 
 export const UIBoard = function UIBoard() {
@@ -65,13 +63,7 @@ export const UIBoard = function UIBoard() {
   }, [x, y, holdingPiece]);
 
   return (
-    <Container
-      width="100%"
-      height="100%"
-      onMouseMove={onMouseMove}
-      onMouseDown={onMouseDown}
-      onMouseUp={onMouseUp}
-    >
+    <Container onMouseMove={onMouseMove} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
       {gameState.board.map((row) =>
         row.map((square) => square && <UIPiece key={Piece.key(square)} piece={square} />),
       )}
