@@ -2,8 +2,8 @@ import { changeArrayIndex } from '../changeArrayIndex';
 import type { IPiece } from '../piece/IPiece';
 import type { IBoard } from './IBoard';
 
-export const boardRemovePiece = (board: IBoard, piece: IPiece) =>
-  changeArrayIndex(
+export const boardRemovePiece = (board: IBoard, piece: IPiece) => {
+  return changeArrayIndex(
     board,
     piece.position.row,
     changeArrayIndex(
@@ -12,3 +12,4 @@ export const boardRemovePiece = (board: IBoard, piece: IPiece) =>
       undefined,
     ),
   ) as IBoard;
+};
