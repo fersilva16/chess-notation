@@ -4,7 +4,7 @@ import { MouseEventHandler, useEffect, useState } from 'react';
 import { GameState } from '../chess/GameState';
 import { Piece } from '../chess/Piece';
 import { Position } from '../chess/Position';
-import { UIPiece } from './UIPiece';
+import UIPiece from './UIPiece';
 
 const Container = styled.div`
   background-image: url('https://images.chesscomfiles.com/chess-themes/boards/green/150.png');
@@ -14,7 +14,7 @@ const Container = styled.div`
   height: 100%;
 `;
 
-export const UIBoard = function UIBoard() {
+function UIBoard() {
   const [gameState, setGameState] = useState(GameState.initial);
   const [holdingPiece, setHoldingPiece] = useState<Piece.T | undefined>(undefined);
   const [x, setX] = useState<number>(0);
@@ -69,4 +69,6 @@ export const UIBoard = function UIBoard() {
       )}
     </Container>
   );
-};
+}
+
+export default UIBoard;

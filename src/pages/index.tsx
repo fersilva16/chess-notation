@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 
-import { UIBoard } from '../components/UIBoard';
+import UIBoard from '../components/UIBoard';
 
 const Container = styled.div`
   width: 100vw;
