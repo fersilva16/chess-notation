@@ -1,7 +1,7 @@
-import { IBoardSquare } from '../../board/IBoard';
-import { IPosition } from '../../position/IPosition';
+import type { IBoardSquare } from '../../board/IBoard';
+import type { IPosition } from '../../position/IPosition';
 import { positionRelative } from '../../position/positionRelative';
-import { IPiece } from '../IPiece';
+import type { IPiece } from '../IPiece';
 
 const PAWN_START_POSITION = 1;
 

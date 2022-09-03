@@ -1,9 +1,9 @@
 import { boardMovePiece } from '../board/boardMovePiece';
-import { IPiece } from '../piece/IPiece';
+import type { IPiece } from '../piece/IPiece';
 import { pieceColorNext } from '../piece/pieceColorNext';
-import { IPosition } from '../position/IPosition';
+import type { IPosition } from '../position/IPosition';
 import { gameStateValidatePieceMove } from './gameStateValidatePieceMove';
-import { IGameState } from './IGameState';
+import type { IGameState } from './IGameState';
 
 export const gameStateMovePiece = (
   gameState: IGameState,

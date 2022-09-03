@@ -1,8 +1,8 @@
-import { RefObject } from 'react';
+import type { RefObject } from 'react';
 
-import { IPosition } from '../position/IPosition';
-import { PIECE_COLORS } from './PieceColorEnum';
-import { PIECE_TYPES } from './PieceTypeEnum';
+import type { IPosition } from '../position/IPosition';
+import type { PIECE_COLORS } from './PieceColorEnum';
+import type { PIECE_TYPES } from './PieceTypeEnum';
 
 export type IPiece = {
   type: keyof typeof PIECE_TYPES;

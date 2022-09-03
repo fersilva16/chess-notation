@@ -1,3 +1,3 @@
-import { IPosition } from './IPosition';
+import type { IPosition } from './IPosition';
 
 export const positionCreate = (row: number, column: number): IPosition => ({ row, column });

@@ -1,8 +1,8 @@
 import { boardGetPiece } from '../board/boardGetPiece';
-import { IPiece } from '../piece/IPiece';
+import type { IPiece } from '../piece/IPiece';
 import { pieceValidateMoveMap } from '../piece/validation/pieceValidateMoveMap';
-import { IPosition } from '../position/IPosition';
-import { IGameState } from './IGameState';
+import type { IPosition } from '../position/IPosition';
+import type { IGameState } from './IGameState';
 
 export const gameStateValidatePieceMove = (
   gameState: IGameState,

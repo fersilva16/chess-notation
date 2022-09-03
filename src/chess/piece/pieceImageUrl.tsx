@@ -1,6 +1,6 @@
-import { IPiece } from './IPiece';
-import { PIECE_COLORS } from './PieceColorEnum';
-import { PIECE_TYPES } from './PieceTypeEnum';
+import type { IPiece } from './IPiece';
+import type { PIECE_COLORS } from './PieceColorEnum';
+import type { PIECE_TYPES } from './PieceTypeEnum';
 
 const pieceTypeImageMap: Record<keyof typeof PIECE_TYPES, string> = {
   BISHOP: 'b',

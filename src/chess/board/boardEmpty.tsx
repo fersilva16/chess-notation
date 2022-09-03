@@ -1,4 +1,4 @@
-import { IBoard, IBoardRow } from './IBoard';
+import type { IBoard, IBoardRow } from './IBoard';
 
 const LENGTH = 8;
 

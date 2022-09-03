@@ -1,6 +1,6 @@
-import { IBoardSquare } from '../../board/IBoard';
-import { IPosition } from '../../position/IPosition';
-import { IPiece } from '../IPiece';
+import type { IBoardSquare } from '../../board/IBoard';
+import type { IPosition } from '../../position/IPosition';
+import type { IPiece } from '../IPiece';
 import { PIECE_TYPES } from '../PieceTypeEnum';
 import { piecePawnValidateMove } from './piecePawnValidateMove';
 

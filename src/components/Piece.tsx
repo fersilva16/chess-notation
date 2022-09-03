@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { memo } from 'react';
 
-import { IPiece } from '../chess/piece/IPiece';
+import type { IPiece } from '../chess/piece/IPiece';
 import { pieceImageUrl } from '../chess/piece/pieceImageUrl';
 
 type ContainerProps = {
@@ -24,13 +24,13 @@ export type PieceProps = {
   piece: IPiece;
 };
 
-const Piece = memo(({ piece }: PieceProps) => (
+const Piece = ({ piece }: PieceProps) => (
   <Container
     ref={piece.ref}
     row={piece.position.row}
     column={piece.position.column}
     imageUrl={pieceImageUrl(piece)}
   />
-));
+);
 
-export default Piece;
+export default memo(Piece);

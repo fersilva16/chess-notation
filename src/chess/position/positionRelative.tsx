@@ -1,5 +1,5 @@
 import { PIECE_COLORS } from '../piece/PieceColorEnum';
-import { IPosition } from './IPosition';
+import type { IPosition } from './IPosition';
 import { positionFlipIndex } from './positionFlipIndex';
 
 export const positionRelative = (

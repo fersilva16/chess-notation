@@ -1,4 +1,4 @@
-import { IPiece } from '../piece/IPiece';
+import type { IPiece } from '../piece/IPiece';
 
 export type IBoardSquare = IPiece | undefined;
 
