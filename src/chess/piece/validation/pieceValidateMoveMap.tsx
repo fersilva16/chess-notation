@@ -1,15 +1,7 @@
-import type { IBoardSquare } from '../../board/IBoard';
-import type { IPosition } from '../../position/IPosition';
-import type { IPiece } from '../IPiece';
 import { PIECE_TYPES } from '../PieceTypeEnum';
 import { piecePawnValidateMove } from './piecePawnValidateMove';
 import { pieceRookValidateMove } from './pieceRookValidateMove';
-
-type PieceValidateMoveFunction = (
-  piece: IPiece,
-  position: IPosition,
-  boardSquare?: IBoardSquare,
-) => boolean;
+import type { PieceValidateMoveFunction } from './PieceValidateMove';
 
 export const pieceValidateMoveMap: Record<
   keyof typeof PIECE_TYPES,
