@@ -11,15 +11,32 @@ export const gameStateValidatePieceMove = (
 ) => {
   const boardSquare = boardGetPiece(gameState.board, position);
 
-  if (piece.color !== gameState.currentPlayer) return false;
+  if (piece.color !== gameState.currentPlayer) {
+    return false;
+  }
 
-  if (piece.color === boardSquare?.color) return false;
+  if (piece.color === boardSquare?.color) {
+    return false;
+  }
+
+  if (
+    piece.position.row === position.row &&
+    piece.position.column === position.column
+  ) {
+    return false;
+  }
 
   const pieceValidateMove = pieceValidateMoveMap[piece.type];
 
-  const isPieceMoveValid = pieceValidateMove(piece, position, boardSquare);
+  const isPieceMoveValid = pieceValidateMove({
+    piece,
+    position,
+    boardSquare,
+  });
 
-  if (!isPieceMoveValid) return false;
+  if (!isPieceMoveValid) {
+    return false;
+  }
 
   return true;
 };

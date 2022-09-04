@@ -1,15 +1,13 @@
-import type { IBoardSquare } from '../../board/IBoard';
-import type { IPosition } from '../../position/IPosition';
 import { positionRelative } from '../../position/positionRelative';
-import type { IPiece } from '../IPiece';
+import type { PieceValidateMoveArgs } from './PieceValidateMove';
 
 const PAWN_START_POSITION = 1;
 
-export const piecePawnValidateMove = (
-  piece: IPiece,
-  position: IPosition,
-  boardSquare?: IBoardSquare,
-) => {
+export const piecePawnValidateMove = ({
+  piece,
+  position,
+  boardSquare,
+}: PieceValidateMoveArgs) => {
   const piecePositionRelative = positionRelative(piece.position, piece.color);
   const newPositionRelativate = positionRelative(position, piece.color);
 
