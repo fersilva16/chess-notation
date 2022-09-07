@@ -2,16 +2,16 @@ import { boardGetPiece } from '../board/boardGetPiece';
 import type { IPiece } from '../piece/IPiece';
 import { pieceValidateMoveMap } from '../piece/validation/pieceValidateMoveMap';
 import type { IPosition } from '../position/IPosition';
-import type { IGameState } from './IGameState';
+import type { IGame } from './IGame';
 
-export const gameStateValidatePieceMove = (
-  gameState: IGameState,
+export const gameValidatePieceMove = (
+  game: IGame,
   piece: IPiece,
   position: IPosition,
 ) => {
-  const boardSquare = boardGetPiece(gameState.board, position);
+  const boardSquare = boardGetPiece(game.board, position);
 
-  if (piece.color !== gameState.currentPlayer) {
+  if (piece.color !== game.currentPlayer) {
     return false;
   }
 

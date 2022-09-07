@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import type { MouseEvent, MouseEventHandler } from 'react';
 import { useState } from 'react';
 
-import { gameStateInitial } from '../chess/gameState/gameStateInitial';
-import { gameStateMovePiece } from '../chess/gameState/gameStateMovePiece';
+import { gameInitial } from '../chess/game/gameInitial';
+import { gameMovePiece } from '../chess/game/gameMovePiece';
 import { highlightPosition } from '../chess/highlights/highlightPosition';
 import { highlightsInitial } from '../chess/highlights/highlightsInitial';
 import type { IPiece } from '../chess/piece/IPiece';
@@ -22,7 +22,7 @@ const Container = styled.div`
 `;
 
 const Board = () => {
-  const [gameState, setGameState] = useState(gameStateInitial);
+  const [game, setGame] = useState(gameInitial);
   const [holdingPiece, setHoldingPiece] = useState<IPiece | undefined>();
   const [highlights, setHighlights] = useState(highlightsInitial);
 
@@ -67,7 +67,7 @@ const Board = () => {
       return;
     }
 
-    const piece = gameState.board[row][column];
+    const piece = game.board[row][column];
 
     if (piece?.ref.current) {
       piece.ref.current.style.zIndex = '1';
@@ -86,9 +86,7 @@ const Board = () => {
     const row = Math.floor(y);
     const column = Math.floor(x);
 
-    setGameState(
-      gameStateMovePiece(gameState, holdingPiece, positionCreate(row, column)),
-    );
+    setGame(gameMovePiece(game, holdingPiece, positionCreate(row, column)));
 
     setHoldingPiece(undefined);
   };
@@ -125,7 +123,7 @@ const Board = () => {
             ),
         ),
       )}
-      {gameState.board.map((row) =>
+      {game.board.map((row) =>
         row.map(
           (square) => square && <Piece key={pieceKey(square)} piece={square} />,
         ),
