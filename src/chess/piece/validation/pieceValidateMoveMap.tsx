@@ -1,5 +1,6 @@
 import { PIECE_TYPES } from '../PieceTypeEnum';
 import { pieceBishopValidateMove } from './pieceBishopValidateMove';
+import { pieceKingValidateMove } from './pieceKingValidateMove';
 import { piecePawnValidateMove } from './piecePawnValidateMove';
 import { pieceQueenValidateMove } from './pieceQueenValidateMove';
 import { pieceRookValidateMove } from './pieceRookValidateMove';
@@ -10,7 +11,7 @@ export const pieceValidateMoveMap: Record<
   PieceValidateMoveFunction
 > = {
   [PIECE_TYPES.BISHOP]: pieceBishopValidateMove,
-  [PIECE_TYPES.KING]: () => false,
+  [PIECE_TYPES.KING]: pieceKingValidateMove,
   [PIECE_TYPES.KNIGHT]: () => false,
   [PIECE_TYPES.PAWN]: piecePawnValidateMove,
   [PIECE_TYPES.QUEEN]: pieceQueenValidateMove,
