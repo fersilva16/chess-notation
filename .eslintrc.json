@@ -26,6 +26,8 @@
       }
     ],
 
+    "no-console": "error",
+
     "import/order": [
       "error",
       {
