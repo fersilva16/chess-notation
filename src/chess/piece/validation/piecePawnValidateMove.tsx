@@ -31,6 +31,10 @@ export const piecePawnValidateMove = ({
     return false;
   }
 
+  if (position.column !== piece.position.column) {
+    return false;
+  }
+
   if (piecePositionRelative.row === PAWN_START_POSITION) {
     if (newPositionRelativate.row - piecePositionRelative.row > 2) {
       return false;
@@ -40,10 +44,6 @@ export const piecePawnValidateMove = ({
   }
 
   if (newPositionRelativate.row - piecePositionRelative.row > 1) {
-    return false;
-  }
-
-  if (position.column !== piece.position.column) {
     return false;
   }
 
