@@ -26,12 +26,21 @@ const Board = () => {
   const [holdingPiece, setHoldingPiece] = useState<IPiece | undefined>();
   const [highlights, setHighlights] = useState(highlightsInitial);
 
+  const [x, setX] = useState<number | undefined>();
+  const [y, setY] = useState<number | undefined>();
+
   const getPositionFromEvent = (event: MouseEvent<HTMLDivElement>) => {
     const pos = event.currentTarget.getBoundingClientRect();
 
+    const x = (event.clientX - pos.x) / (pos.width / 8);
+    const y = (event.clientY - pos.y) / (pos.height / 8);
+
+    setX(x);
+    setY(y);
+
     return {
-      x: (event.clientX - pos.x) / (pos.width / 8),
-      y: (event.clientY - pos.y) / (pos.height / 8),
+      x,
+      y,
     };
   };
 
@@ -95,6 +104,9 @@ const Board = () => {
       onMouseUp={onMouseUp}
       onContextMenu={onContextMenu}
     >
+      {holdingPiece && x && y && (
+        <Highlight row={Math.floor(y)} column={Math.floor(x)} />
+      )}
       {holdingPiece && (
         <Highlight
           row={holdingPiece.position.row}
