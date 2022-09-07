@@ -95,6 +95,12 @@ const Board = () => {
       onMouseUp={onMouseUp}
       onContextMenu={onContextMenu}
     >
+      {holdingPiece && (
+        <Highlight
+          row={holdingPiece.position.row}
+          column={holdingPiece.position.column}
+        />
+      )}
       {highlights.map((row, rowIndex) =>
         row.map(
           (value, columnIndex) =>
