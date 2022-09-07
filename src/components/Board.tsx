@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import type { MouseEvent, MouseEventHandler } from 'react';
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { gameInitial } from '../chess/game/gameInitial';
 import { gameMovePiece } from '../chess/game/gameMovePiece';
@@ -22,6 +21,7 @@ const Container = styled.div`
 `;
 
 const Board = () => {
+  const ref = useRef<HTMLDivElement>(null);
   const [game, setGame] = useState(gameInitial);
   const [holdingPiece, setHoldingPiece] = useState<IPiece | undefined>();
   const [highlights, setHighlights] = useState(highlightsInitial);
@@ -29,8 +29,8 @@ const Board = () => {
   const [x, setX] = useState<number | undefined>();
   const [y, setY] = useState<number | undefined>();
 
-  const getPositionFromEvent = (event: MouseEvent<HTMLDivElement>) => {
-    const pos = event.currentTarget.getBoundingClientRect();
+  const getPositionFromEvent = (event: MouseEvent) => {
+    const pos = ref.current!.getBoundingClientRect();
 
     const x = (event.clientX - pos.x) / (pos.width / 8);
     const y = (event.clientY - pos.y) / (pos.height / 8);
@@ -44,64 +44,82 @@ const Board = () => {
     };
   };
 
-  const onMouseMove: MouseEventHandler<HTMLDivElement> = (event) => {
-    if (!holdingPiece?.ref.current) return;
+  const onMouseMove = useCallback(
+    (event: MouseEvent) => {
+      if (!holdingPiece?.ref.current) return;
 
-    const { x, y } = getPositionFromEvent(event);
+      const { x, y } = getPositionFromEvent(event);
 
-    const row = positionClamp(x) * 100 - 50;
-    const column = positionClamp(y) * 100 - 50;
+      const row = positionClamp(x) * 100 - 50;
+      const column = positionClamp(y) * 100 - 50;
 
-    holdingPiece.ref.current.style.transform = `translate(${row}%, ${column}%)`;
-  };
+      holdingPiece.ref.current.style.transform = `translate(${row}%, ${column}%)`;
+    },
+    [holdingPiece],
+  );
 
-  const onMouseDown: MouseEventHandler<HTMLDivElement> = (event) => {
-    const { x, y } = getPositionFromEvent(event);
+  const onMouseDown = useCallback(
+    (event: MouseEvent) => {
+      const { x, y } = getPositionFromEvent(event);
 
-    const row = Math.floor(y);
-    const column = Math.floor(x);
+      const row = Math.floor(y);
+      const column = Math.floor(x);
 
-    if (event.button === 2) {
-      setHighlights(highlightPosition(highlights, positionCreate(row, column)));
+      if (event.button === 2) {
+        setHighlights(
+          highlightPosition(highlights, positionCreate(row, column)),
+        );
 
-      return;
-    }
+        return;
+      }
 
-    const piece = game.board[row][column];
+      const piece = game.board[row][column];
 
-    if (piece?.ref.current) {
-      piece.ref.current.style.zIndex = '1';
+      if (piece?.ref.current) {
+        piece.ref.current.style.zIndex = '1';
 
-      setHoldingPiece(piece);
-    }
-  };
+        setHoldingPiece(piece);
+      }
+    },
+    [game, highlights],
+  );
 
-  const onMouseUp: MouseEventHandler<HTMLDivElement> = (event) => {
-    if (!holdingPiece) return;
+  const onMouseUp = useCallback(
+    (event: MouseEvent) => {
+      if (!holdingPiece) return;
 
-    holdingPiece.ref.current?.removeAttribute('style');
+      holdingPiece.ref.current?.removeAttribute('style');
 
-    const { x, y } = getPositionFromEvent(event);
+      const { x, y } = getPositionFromEvent(event);
 
-    const row = Math.floor(y);
-    const column = Math.floor(x);
+      const row = Math.floor(y);
+      const column = Math.floor(x);
 
-    setGame(gameMovePiece(game, holdingPiece, positionCreate(row, column)));
+      setGame(gameMovePiece(game, holdingPiece, positionCreate(row, column)));
 
-    setHoldingPiece(undefined);
-  };
+      setHoldingPiece(undefined);
+    },
+    [game, holdingPiece],
+  );
 
-  const onContextMenu: MouseEventHandler<unknown> = (event) => {
-    event.preventDefault();
-  };
+  useEffect(() => {
+    document.addEventListener('mousemove', onMouseMove);
+
+    document.addEventListener('mousedown', onMouseDown);
+
+    document.addEventListener('mouseup', onMouseUp);
+
+    return () => {
+      document.removeEventListener('mousemove', onMouseMove);
+
+      document.removeEventListener('mousedown', onMouseDown);
+
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+  }, [onMouseMove, onMouseDown, onMouseUp]);
 
   return (
-    <Container
-      onMouseMove={onMouseMove}
-      onMouseDown={onMouseDown}
-      onMouseUp={onMouseUp}
-      onContextMenu={onContextMenu}
-    >
+    <Container ref={ref} onContextMenu={(event) => event.preventDefault()}>
       {holdingPiece && x && y && (
         <Highlight row={Math.floor(y)} column={Math.floor(x)} />
       )}
