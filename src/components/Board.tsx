@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import type { MouseEventHandler } from 'react';
-import { useEffect, useState } from 'react';
+import type { MouseEvent, MouseEventHandler } from 'react';
+import { useState } from 'react';
 
 import { gameStateInitial } from '../chess/gameState/gameStateInitial';
 import { gameStateMovePiece } from '../chess/gameState/gameStateMovePiece';
@@ -23,22 +23,32 @@ const Container = styled.div`
 
 const Board = () => {
   const [gameState, setGameState] = useState(gameStateInitial);
-  const [holdingPiece, setHoldingPiece] = useState<IPiece | undefined>(
-    undefined,
-  );
+  const [holdingPiece, setHoldingPiece] = useState<IPiece | undefined>();
   const [highlights, setHighlights] = useState(highlightsInitial);
 
-  const [x, setX] = useState<number>(0);
-  const [y, setY] = useState<number>(0);
-
-  const onMouseMove: MouseEventHandler<HTMLDivElement> = (event) => {
+  const getPositionFromEvent = (event: MouseEvent<HTMLDivElement>) => {
     const pos = event.currentTarget.getBoundingClientRect();
 
-    setX((event.clientX - pos.x) / (pos.width / 8));
-    setY((event.clientY - pos.y) / (pos.height / 8));
+    return {
+      x: (event.clientX - pos.x) / (pos.width / 8),
+      y: (event.clientY - pos.y) / (pos.height / 8),
+    };
   };
 
-  const onMouseDown: MouseEventHandler<unknown> = (event) => {
+  const onMouseMove: MouseEventHandler<HTMLDivElement> = (event) => {
+    if (!holdingPiece?.ref.current) return;
+
+    const { x, y } = getPositionFromEvent(event);
+
+    const row = positionClamp(x) * 100 - 50;
+    const column = positionClamp(y) * 100 - 50;
+
+    holdingPiece.ref.current.style.transform = `translate(${row}%, ${column}%)`;
+  };
+
+  const onMouseDown: MouseEventHandler<HTMLDivElement> = (event) => {
+    const { x, y } = getPositionFromEvent(event);
+
     const row = Math.floor(y);
     const column = Math.floor(x);
 
@@ -57,10 +67,12 @@ const Board = () => {
     }
   };
 
-  const onMouseUp: MouseEventHandler<unknown> = () => {
+  const onMouseUp: MouseEventHandler<HTMLDivElement> = (event) => {
     if (!holdingPiece) return;
 
     holdingPiece.ref.current?.removeAttribute('style');
+
+    const { x, y } = getPositionFromEvent(event);
 
     const row = Math.floor(y);
     const column = Math.floor(x);
@@ -75,15 +87,6 @@ const Board = () => {
   const onContextMenu: MouseEventHandler<unknown> = (event) => {
     event.preventDefault();
   };
-
-  useEffect(() => {
-    if (holdingPiece?.ref.current) {
-      const row = positionClamp(x) * 100 - 50;
-      const column = positionClamp(y) * 100 - 50;
-
-      holdingPiece.ref.current.style.transform = `translate(${row}%, ${column}%)`;
-    }
-  }, [x, y, holdingPiece]);
 
   return (
     <Container
