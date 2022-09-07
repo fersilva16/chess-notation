@@ -22,8 +22,6 @@ export type HighlightProps = {
 };
 
 const Highlight = ({ row, column }: HighlightProps) => {
-  console.log(row, column);
-
   return <Container row={row} column={column} />;
 };
 
