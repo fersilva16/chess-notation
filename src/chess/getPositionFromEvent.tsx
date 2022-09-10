@@ -1,5 +1,7 @@
 import type { Dispatch, RefObject, SetStateAction } from 'react';
 
+import { positionClamp } from './position/positionClamp';
+
 export const getPositionFromEvent = (
   ref: RefObject<HTMLDivElement>,
   event: MouseEvent,
@@ -11,8 +13,8 @@ export const getPositionFromEvent = (
   const x = (event.clientX - pos.x) / (pos.width / 8);
   const y = (event.clientY - pos.y) / (pos.height / 8);
 
-  setX && setX(x);
-  setY && setY(y);
+  setX && setX(positionClamp(x));
+  setY && setY(positionClamp(y));
 
   return {
     x,
