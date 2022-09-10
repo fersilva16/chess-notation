@@ -24,7 +24,7 @@ const Board = () => {
 
   return (
     <Container ref={ref} onContextMenu={(event) => event.preventDefault()}>
-      {holdingPiece && x && y && (
+      {holdingPiece && x !== undefined && y !== undefined && (
         <Highlight row={Math.floor(y)} column={Math.floor(x)} />
       )}
       {holdingPiece && (
